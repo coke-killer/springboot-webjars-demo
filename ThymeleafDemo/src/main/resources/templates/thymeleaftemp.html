@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<head>-->
+<!--    <meta charset="UTF-8"></meta>-->
+<!--    <title>Example If/Unless </title>-->
+<!--    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">-->
+<!--    <style type="text/css">-->
+<!--        .odd {-->
+<!--            background-color: aquamarine;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--引用代码片段--选择器替换-->
+<!--th:replace 替换原始div标签，替换：insert 会直接包裹在div内部-->
+<div th:replace="common/head::static('书籍管理')"></div>
+<!--id选择器-->
+<!--<div th:replace="common/head::#"xxx"('图书管理')"> </div>-->
+<body>
+<div class="container">
+    <h1>for 循环</h1>
+    <table class="table">
+        <tr>
+            <th>下标</th>
+            <th>序号</th>
+            <th>id</th>
+            <th>姓名</th>
+            <th>密码</th>
+            <th>isbn</th>
+            <th>书名</th>
+            <th>价格</th>
+            <th>页数</th>
+            <th>封面</th>
+        </tr>
+        <!--        stat 迭代状态变量，获取index 当前迭代索引，count 当前迭代序号。even  偶数行，odd  奇数行-->
+        <tr th:each="item,stat : ${books}" th:class="${stat.even}?'even':'odd'">
+            <td th:text="${stat.index}"></td>
+            <td th:text="${stat.count}"></td>
+            <td th:text="${item.user.id}">neo</td>
+            <td th:text="${#strings.capitalizeWords(item.user.name)}">6</td>
+            <td th:text="${item.user.password}">213</td>
+            <td th:text="${item.isbn}">index</td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.price}"></td>
+            <td th:text="${item.pages}"></td>
+            <td th:text="${item.cover}"></td>
+        </tr>
+    </table>
+    <div th:text="${books[0].user}">
+
+    </div>
+    <form action="/user">
+        <input id="id" name="id" th:value="${books[0].user.id}"/>
+        <input id="name" name="name" th:value="${books[0].user.name}"/>
+        <input id="password" th:value="${books[0].user.password}">
+    </form>
+    <form action="/user" th:object="${books[0].user}">
+        <input id="id1" name="id" th:value="*{id}"/>
+        <input id="name1" name="name" th:value="*{name}"/>
+        <input id="password1" th:value="*{password}">
+    </form>
+    <!--    字符串拼接-->
+    <div th:text="${'I am'+(books[0].user.name!=null?books[0].user.name:'NoBody')}"></div>
+    <div th:if="${books}">
+        <div>书籍列表存在</div>
+    </div>
+</div>
+<script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>

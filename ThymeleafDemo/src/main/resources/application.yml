@@ -1,0 +1,28 @@
+spring:
+  thymeleaf:
+    cache: false  #\u542F\u7528\u7F13\u5B58\uFF0C\u5EFA\u8BAE\u751F\u4EA7\u5F00\u542F
+    check-template-location: true #\u68C0\u67E5\u6A21\u677F\u662F\u5426\u5B58\u5728
+    enabled: true #\u662F\u5426\u542F\u7528
+    encoding: UTF-8 #\u6A21\u677F\u7F16\u7801
+    excluded-view-names: #\u5E94\u8BE5\u4ECE\u89E3\u6790\u4E2D\u6392\u9664\u7684\u8BD5\u56FE\u540D\u79F0\u5217\u8868\uFF08\u7528\u9017\u53F7\u5206\u9694\uFF09
+    mode: HTML #\u6A21\u677F\u6A21\u5F0F
+    prefix: classpath:/templates/ #\u6A21\u677F\u5B58\u653E\u8DEF\u5F84
+    suffix: .html #\u6A21\u677F\u540E\u7F00
+  datasource:
+    url: jdbc:mysql://localhost:3306/messagebook?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password: yudongyue
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  devtools:
+    restart:
+      enabled: true #\u8BBE\u7F6E\u5F00\u542F\u70ED\u90E8\u7F72
+      additional-paths: src/main/java #\u91CD\u542F\u76EE\u5F55
+      exclude: WEB-INF/**
+  freemarker:
+    cache: false #\u9875\u9762\u4E0D\u52A0\u8F7D\u7F13\u5B58\u3002\u4FEE\u6539\u5373\u4F7F\u751F\u6548
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.example.demo
+
+

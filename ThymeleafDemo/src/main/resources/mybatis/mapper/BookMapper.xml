@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.BookMapper">
+    <resultMap id="bookList" type="Book">
+        <id property="id" column="u_id"/>
+        <result property="isbn" column="b_isbn"/>
+        <result property="cover" column="b_cover"/>
+        <result property="name" column="b_name"/>
+        <result property="pages" column="b_pages"/>
+        <result property="publisher" column="b_publisher"/>
+        <result property="price" column="b_price"/>
+        <association property="user" column="u_id" javaType="User">
+            <id property="id" column="u_id"/>
+            <result property="name" column="u_name"/>
+            <result property="password" column="u_password"/>
+        </association>
+    </resultMap>
+    <select id="getAll" resultMap="bookList">
+        select a.b_id,b.u_id,a.b_isbn,a.b_name,a.b_price,a.b_publisher,a.b_pages,a.b_cover,b.u_name,b.u_password from t_user b inner join t_book a on a.u_id=b.u_id
+    </select>
+</mapper>
